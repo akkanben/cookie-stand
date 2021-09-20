@@ -1,20 +1,20 @@
 'use strict';
 
 let times = [
-  '6am',
-  '7am',
-  '8am',
-  '9am',
+  '6am ',
+  '7am ',
+  '8am ',
+  '9am ',
   '10am',
   '11am',
   '12pm',
-  '1pm',
-  '2pm',
-  '3pm',
-  '4pm',
-  '5pm',
-  '6pm',
-  '7pm',
+  '1pm ',
+  '2pm ',
+  '3pm ',
+  '4pm ',
+  '5pm ',
+  '6pm ',
+  '7pm ',
 ];
 
 let seattle = {
@@ -133,10 +133,10 @@ let getFakeSalesUL = function (city) {
 
 let getCityArticleWithHeader = function (city) {
   let citiesArticle = document.createElement('article');
-  let cityH1 = document.createElement('h1');
-  cityH1.innerText = city.name;
+  let cityH2 = document.createElement('h2');
+  cityH2.innerText = city.name;
   let cityUL = getFakeSalesUL(city);
-  citiesArticle.appendChild(cityH1);
+  citiesArticle.appendChild(cityH2);
   citiesArticle.appendChild(cityUL);
   return citiesArticle;
 };
@@ -150,8 +150,8 @@ let cityList = [
   lima,
 ];
 
-let mainEL = document.querySelector('main');
+let citiesSection = document.getElementById('citiesSection');
 for (let i = 0; i < cityList.length; i++) {
 
-  mainEL.appendChild(getCityArticleWithHeader(cityList[i]));
+  citiesSection.appendChild(getCityArticleWithHeader(cityList[i]));
 }

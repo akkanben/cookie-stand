@@ -1,0 +1,38 @@
+#citiesSection {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+article {
+  display: inline-block;
+  margin: 1em;
+  background-color: lightgray;
+  padding: .7em;
+}
+h1 {
+  font-size: 3em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+h2 {
+  font-size: 1.5em;
+  margin-bottom: .5em;
+}
+li {
+  padding: .4em;
+  border-left: thin solid black;
+  border-right: thin solid black;
+  border-top: thin solid black;
+}
+li:last-child {
+  background-color: gray;
+  border-bottom: thin solid black;
+  font-weight: bold;
+  color: white;
+}
+
