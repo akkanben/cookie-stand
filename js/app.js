@@ -1,28 +1,11 @@
 'use strict';
 
-
-
 function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
   this.name = name;
   this.minimumCustomer = minimumCustomer;
   this.maximumCustomer = maximumCustomer;
   this.averageCookiePerSale = averageCookiePerSale;
 }
-
-City.prototype.generateRandomCustomerCount = function () {
-  let randomCount = Math.random() * (1 + this.maximumCustomer - this.minimumCustomer) + this.minimumCustomer;
-  return Math.floor(randomCount);
-};
-
-City.prototype.simulateCookieSales = function () {
-  let cookieSales = [];
-  let numHours = this.times.length;
-  for (let i = 0; i < numHours; i++) {
-    let cookieCount = Math.floor(this.getRandomCustomerCount() * this.averageCookiePerSale);
-    cookieSales.push(cookieCount);
-  }
-  return cookieSales;
-};
 
 City.prototype.times = [
   '6:00 am ',
@@ -41,11 +24,40 @@ City.prototype.times = [
   '7:00 pm ',
 ];
 
+City.prototype.generateRandomCustomerCount = function () {
+  let randomCount = Math.random() * (1 + this.maximumCustomer - this.minimumCustomer) + this.minimumCustomer;
+  return Math.floor(randomCount);
+};
+
+City.prototype.simulateCookieSales = function () {
+  let cookieSales = [];
+  let numHours = this.times.length;
+  for (let i = 0; i < numHours; i++) {
+    let cookieCount = Math.floor(this.generateRandomCustomerCount() * this.averageCookiePerSale);
+    cookieSales.push(cookieCount);
+  }
+  return cookieSales;
+};
+
+City.prototype.renderTableRow = function (parentEl) {
+  let currentRow = document.createElement('tr');
+  let cookieSales = this.simulateCookieSales();
+  for (let i = 0; i < this.times.length; i++) {
+    let currentTableData = document.createElement('td');
+    currentTableData.innerText = cookieSales[i];
+    currentRow.appendChild(currentTableData);
+  }
+  parentEl.appendChild(currentRow);
+};
+
 let seattle = new City('Seatte', 23, 65, 6.3);
 let tokyo = new City('Tokyo', 3, 24, 1.2);
 let dubai = new City('Dubai', 11, 38, 3.7);
 let paris = new City('Paris', 20, 38, 2.3);
 let lima = new City('Lima', 2, 16, 4.6);
+
+
+
 
 let getFakeSalesUL = function (city) {
   let cookieUL = document.createElement('ul');
@@ -84,7 +96,10 @@ let cityList = [
 ];
 
 let citiesSection = document.getElementById('citiesSection');
+let citiesTable = document.createElement('table');
 
 for (let i = 0; i < cityList.length; i++) {
-  citiesSection.appendChild(getCityArticleWithHeader(cityList[i]));
+  //citiesSection.appendChild(getCityArticleWithHeader(cityList[i]));
+  cityList[i].renderTableRow(citiesTable);
+  citiesSection.appendChild(citiesTable);
 }
