@@ -35,12 +35,4 @@ li:last-child {
   font-weight: bold;
   color: white;
 }
-main {
-  height: 100%;
-}
-
-footer {
-  height: 200px;
-  background-color: black;
-}
 
