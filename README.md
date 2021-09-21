@@ -1,11 +1,6 @@
-# LAB - Number
+# Salmon Cookies
 
-## Project Name
+## Lab: 06
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app.
+Today's lab was to generate sales data for Pat's Salmon Cookie Store with JavaScript object literals. The sales data had to simulated and appended to the HTML docutment. 
 
-### Author:
-
-### Links and Resources
-
-### Reflections and Comments
