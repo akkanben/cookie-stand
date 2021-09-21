@@ -1,6 +1,30 @@
 'use strict';
 
-let times = [
+
+
+function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
+  this.name = name;
+  this.minimumCustomer = minimumCustomer;
+  this.maximumCustomer = maximumCustomer;
+  this.averageCookiePerSale = averageCookiePerSale;
+}
+
+City.prototype.generateRandomCustomerCount = function () {
+  let randomCount = Math.random() * (1 + this.maximumCustomer - this.minimumCustomer) + this.minimumCustomer;
+  return Math.floor(randomCount);
+};
+
+City.prototype.simulateCookieSales = function () {
+  let cookieSales = [];
+  let numHours = this.times.length;
+  for (let i = 0; i < numHours; i++) {
+    let cookieCount = Math.floor(this.getRandomCustomerCount() * this.averageCookiePerSale);
+    cookieSales.push(cookieCount);
+  }
+  return cookieSales;
+};
+
+City.prototype.times = [
   '6:00 am ',
   '7:00 am ',
   '8:00 am ',
@@ -17,28 +41,6 @@ let times = [
   '7:00 pm ',
 ];
 
-function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
-  this.name = name;
-  this.minimumCustomer = minimumCustomer;
-  this.maximumCustomer = maximumCustomer;
-  this.averageCookiePerSale = averageCookiePerSale;
-}
-
-City.prototype.generateRandomCustomerCount = function () {
-  let randomCount = Math.random() * (1 + this.maximumCustomer - this.minimumCustomer) + this.minimumCustomer;
-  return Math.floor(randomCount);
-};
-
-City.prototype.simulateCookieSales = function () {
-  let cookieSales = [];
-  let numHours = times.length;
-  for (let i = 0; i < numHours; i++) {
-    let cookieCount = Math.floor(this.getRandomCustomerCount() * this.averageCookiePerSale);
-    cookieSales.push(cookieCount);
-  }
-  return cookieSales;
-};
-
 let seattle = new City('Seatte', 23, 65, 6.3);
 let tokyo = new City('Tokyo', 3, 24, 1.2);
 let dubai = new City('Dubai', 11, 38, 3.7);
@@ -48,13 +50,13 @@ let lima = new City('Lima', 2, 16, 4.6);
 let getFakeSalesUL = function (city) {
   let cookieUL = document.createElement('ul');
   let total = 0;
-  for (let i = 0; i < times.length; i++) {
+  for (let i = 0; i < city.times.length; i++) {
     let listItemLI = document.createElement('li');
     let cookieCount = Math.floor(city.generateRandomCustomerCount() * city.averageCookiePerSale);
     total += cookieCount;
-    listItemLI.innerText = times[i] + ': ' + cookieCount + ' cookies.';
+    listItemLI.innerText = city.times[i] + ': ' + cookieCount + ' cookies.';
     cookieUL.appendChild(listItemLI);
-    if (i === times.length - 1) {
+    if (i === city.times.length - 1) {
       let totalLI = document.createElement('li');
       totalLI.innerText = 'Total: ' + total;
       cookieUL.appendChild(totalLI);
