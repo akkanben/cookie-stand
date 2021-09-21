@@ -23,16 +23,19 @@ h2 {
   font-size: 1.5em;
   margin-bottom: .5em;
 }
-li {
+td, th{
   padding: .4em;
   border-left: thin solid black;
   border-right: thin solid black;
   border-top: thin solid black;
 }
-li:last-child {
+td:last-child {
   background-color: gray;
   border-bottom: thin solid black;
   font-weight: bold;
   color: white;
 }
 
+tr:last-child {
+  border-bottom: thin solid black;
+}
