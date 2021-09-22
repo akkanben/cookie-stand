@@ -3,6 +3,7 @@
 let citiesSection = document.getElementById('citiesSection');
 let citiesTable = document.createElement('table');
 
+// City prototype function
 function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
   this.name = name;
   this.minimumCustomer = minimumCustomer;
@@ -13,6 +14,7 @@ function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
 
 City.prototype.totalCookieSales = [];
 
+// String data for each column header.
 City.prototype.hours = [
   '6:00 am ',
   '7:00 am ',
@@ -66,6 +68,7 @@ City.prototype.renderTableRows = function (parentEl) {
   parentEl.appendChild(currentRow);
 };
 
+// Generate the Cities
 let seattle = new City('Seatte', 23, 65, 6.3);
 let tokyo = new City('Tokyo', 3, 24, 1.2);
 let dubai = new City('Dubai', 11, 38, 3.7);
