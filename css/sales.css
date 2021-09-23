@@ -1,4 +1,4 @@
-#citiesSection {
+#citiesSection, #tosserSection{
   display: flex;
   width: 100%;
   justify-content: center;
@@ -7,6 +7,8 @@ header {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items:
+  flex-direction: column;
 }
 article {
   display: inline-block;
@@ -15,6 +17,7 @@ article {
   padding: .7em;
 }
 h1 {
+  display: block;
   font-size: 3em;
   margin-top: .5em;
   margin-bottom: .5em;
@@ -38,4 +41,13 @@ td:last-child {
 
 tr:last-child {
   border-bottom: thin solid black;
+}
+table {
+  margin-bottom: 2em;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: black;
 }

@@ -2,6 +2,8 @@
 
 let citiesSection = document.getElementById('citiesSection');
 let citiesTable = document.createElement('table');
+let tosserSection = document.getElementById('tosserSection');
+let tosserTable = document.createElement('table');
 
 // City prototype function
 function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
@@ -10,9 +12,11 @@ function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
   this.maximumCustomer = maximumCustomer;
   this.averageCookiePerSale = averageCookiePerSale;
   this.cookieSales = [];
+  this.tosserCount = [];
 }
 
 City.prototype.totalCookieSales = [];
+City.prototype.totalTossersNeeded = [];
 
 // String data for each column header.
 City.prototype.hours = [
@@ -38,18 +42,29 @@ City.prototype.generateRandomCustomerCount = function () {
   return Math.floor(randomCount);
 };
 
+
 City.prototype.simulateCookieSales = function () {
   let numHours = this.hours.length;
   let total = 0;
+  let tosTotal = 0;
   for (let i = 0; i < numHours; i++) {
     if (i !== numHours - 1) {
-      let cookieCount = Math.floor(this.generateRandomCustomerCount() * this.averageCookiePerSale);
+      let customerCount = Math.floor(this.generateRandomCustomerCount());
+      let cookieCount = Math.floor(customerCount * this.averageCookiePerSale);
+      let tossers = Math.round(customerCount / 20);
+      if (tossers < 2) {
+        tossers = 2;
+      }
+      this.tosserCount.push(tossers);
       this.cookieSales.push(cookieCount);
       total += cookieCount;
+      tosTotal += tossers;
     } else {
       this.cookieSales.push(total);
+      this.tosserCount.push(tosTotal);
     }
   }
+  this.totalTossersNeeded.push(this.tosserCount);
   this.totalCookieSales.push(this.cookieSales);
   return this.cookieSales;
 };
@@ -63,6 +78,16 @@ City.prototype.renderTableRows = function (parentEl) {
   for (let i = 0; i < this.hours.length; i++) {
     let currentTableData = document.createElement('td');
     currentTableData.innerText = cookieSales[i];
+    currentRow.appendChild(currentTableData);
+  }
+  parentEl.appendChild(currentRow);
+};
+
+City.prototype.renderTossRows = function (parentEl) {
+  let currentRow = document.createElement('tr');
+  for (let i = 0; i < this.hours.length; i++) {
+    let currentTableData = document.createElement('td');
+    currentTableData.innerText = this.tosserCount[i];
     currentRow.appendChild(currentTableData);
   }
   parentEl.appendChild(currentRow);
@@ -99,6 +124,7 @@ let cityList = [
 ];
 for (let i = 0; i < cityList.length; i++) {
   cityList[i].renderTableRows(citiesTable);
+  cityList[i].renderTossRows(tosserTable);
 }
 
 // Render table Footer
@@ -119,4 +145,6 @@ citiesTable.appendChild(footer);
 
 // Append to Page
 citiesSection.appendChild(citiesTable);
+tosserSection.appendChild(tosserTable);
+
 
