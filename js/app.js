@@ -17,6 +17,15 @@ function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
 
 City.prototype.totalCookieSales = [];
 City.prototype.totalTossersNeeded = [];
+City.prototype.cityCollection = [];
+
+City.prototype.addCityToCollection = function (city) {
+  City.prototype.cityCollection.push(city);
+};
+
+City.prototype.updateCollection = function (city) {
+  // find the city is in cityCollection update its values
+};
 
 // String data for each column header.
 City.prototype.hours = [
@@ -99,6 +108,12 @@ let tokyo = new City('Tokyo', 3, 24, 1.2);
 let dubai = new City('Dubai', 11, 38, 3.7);
 let paris = new City('Paris', 20, 38, 2.3);
 let lima = new City('Lima', 2, 16, 4.6);
+
+
+seattle.addCityToCollection(seattle);
+City.prototype.addCityToCollection(tokyo);
+console.log(City.prototype.cityCollection[0].name);
+
 
 // Render table header
 let renderHoursHeader = function (parentEl) {
