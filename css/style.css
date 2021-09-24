@@ -153,3 +153,64 @@ li:hover, a:hover {
    
 
 }
+
+/* TABLE AND FORM */
+form {
+  text-align: left;
+}
+label {
+  display: block;
+  height: 1.5em;
+  margin-bottom: 1em;
+}
+div#inputs input {
+  height: 1.5em;
+  display: block;
+  margin-bottom: 1em;
+}
+#button {
+  display: inline-block;
+  border: none;
+  background-color: grey;
+  color: white;
+  padding: .5em;
+  height: clear;
+  margin-left: 2em;
+  margin-bottom: .5em;
+
+}
+div#inputs {
+  display: inline-block;
+  margin-left: 2em;
+}
+div#labels {
+  display: inline-block;
+}
+legend {
+  font-weight: bold;
+  margin-bottom: 1.2em;
+}
+td, th{
+  padding: .4em;
+  border-left: thin solid black;
+  border-right: thin solid black;
+  border-top: thin solid black;
+}
+td:last-child {
+  background-color: gray;
+  border-bottom: thin solid black;
+  font-weight: bold;
+  color: white;
+}
+
+tr:last-child {
+  border-bottom: thin solid black;
+}
+table {
+  margin: 2em 0;
+  width: 76%;
+  margin-right: 2%;
+}
+fieldset {
+  margin-top: 2em;
+}
