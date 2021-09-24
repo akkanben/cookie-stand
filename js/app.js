@@ -20,10 +20,6 @@ City.prototype.totalCookieSales = [];
 City.prototype.totalTossersNeeded = [];
 City.prototype.cityCollection = [];
 
-City.prototype.updateCollection = function (city) {
-  // find the city is in cityCollection update its values
-};
-
 // String data for each column header.
 City.prototype.hours = [
   '6:00 am ',
@@ -164,4 +160,15 @@ City.prototype.renderTotalsFooter(citiesTable);
 citiesSection.appendChild(citiesTable);
 tosserSection.appendChild(tosserTable);
 
+let formEl = document.querySelector('form');
 
+formEl.addEventListener('submit', function (e) {
+  e.preventDefault();
+  let cityName = e.target.cityName.value;
+  let min = e.target.minCustomer.value;
+  let max = e.target.maxCustomer.value;
+  let average = e.target.averageCookie.value;
+  let newCity = new City(cityName, min, max, average);
+  City.prototype.cityCollection.push(newCity);
+  newCity.renderNewCity(citiesTable);
+});
