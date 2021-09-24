@@ -14,7 +14,7 @@ function City(name, minimumCustomer, maximumCustomer, averageCookiePerSale) {
 }
 
 City.prototype.totalCookieSales = [];
-City.prototype.totalTossersNeeded = [];
+//City.prototype.totalTossersNeeded = [];
 City.prototype.cityCollection = [];
 
 // String data for each column header.
@@ -42,6 +42,7 @@ City.prototype.generateRandomCustomerCount = function () {
 };
 
 City.prototype.simulateCookieSales = function () {
+  this.cookieTotal = 0;
   for (let i = 0; i < this.hours.length; i++) {
     // Don't iterate on the last (totals) index
     if (i < this.hours.length - 1) {
@@ -53,22 +54,10 @@ City.prototype.simulateCookieSales = function () {
     }
   }
   // Add the totals to the end of the cookieSales array.
-  this.cookieSales.push(this.cookieTotal);
+  this.cookieSales[this.hours.length - 1] = this.cookieTotal;
 };
 
-City.prototype.renderRow = function (parentEl) {
-  let currentRow = document.createElement('tr');
-  let nameLabel = document.createElement('td');
-  nameLabel.innerText = this.name;
-  currentRow.appendChild(nameLabel);
-  for (let i = 0; i < this.hours.length; i++) {
-    let currentTableData = document.createElement('td');
-    currentTableData.innerText = this.cookieSales[i];
-    currentRow.appendChild(currentTableData);
-  }
-  parentEl.appendChild(currentRow);
-};
-
+// Adds cities cookieSales to totalCookieSales
 City.prototype.calculateTotals = function () {
   for (let i = 0; i < this.hours.length; i++) {
     let num = this.cookieSales[i];
@@ -90,6 +79,20 @@ City.prototype.renderHoursHeader = function (parentEl) {
     tableHeader.appendChild(headerData);
   }
   parentEl.appendChild(tableHeader);
+};
+
+// Render single row
+City.prototype.renderRow = function (parentEl) {
+  let currentRow = document.createElement('tr');
+  let nameLabel = document.createElement('td');
+  nameLabel.innerText = this.name;
+  currentRow.appendChild(nameLabel);
+  for (let i = 0; i < this.hours.length; i++) {
+    let currentTableData = document.createElement('td');
+    currentTableData.innerText = this.cookieSales[i];
+    currentRow.appendChild(currentTableData);
+  }
+  parentEl.appendChild(currentRow);
 };
 
 City.prototype.renderTotalsFooter = function (parentEl) {
@@ -119,13 +122,8 @@ City.prototype.removeTableFooter = function () {
   tableFooterEl.remove();
 };
 
-City.prototype.renderNewCity = function (parentEl) {
-  this.simulateCookieSales();
-  City.prototype.cityCollection.push(this);
-  this.renderRow(citiesTable);
-  City.prototype.drawTable(parentEl);
-};
 
+// Used for clearing and redrawing the table from the current cityCollection
 City.prototype.drawTable = function (parentEl) {
   parentEl.textContent = '';
   City.prototype.renderHoursHeader(citiesTable);
@@ -137,6 +135,10 @@ City.prototype.drawTable = function (parentEl) {
   citiesSection.appendChild(citiesTable);
 };
 
+
+
+// Iterates all the current city objects and returns the index of the matching name
+// Returns -1 if not found.
 City.prototype.getIndexOf = function (match) {
   for (let i = 0; i < City.prototype.cityCollection.length; i++) {
     let current = City.prototype.cityCollection[i].name;
@@ -162,12 +164,14 @@ let defaultCities = [
   lima,
 ];
 
+// Simulate Sales and add all to the cityCollection
 for (let i = 0; i < defaultCities.length; i++) {
   defaultCities[i].simulateCookieSales();
   defaultCities[i].calculateTotals();
   City.prototype.cityCollection.push(defaultCities[i]);
 }
 
+// Selects sales.html elements and draws initial table
 let citiesSection = document.getElementById('citiesSection');
 let citiesTable = document.createElement('table');
 City.prototype.drawTable(citiesTable);
@@ -187,9 +191,19 @@ formEl.addEventListener('submit', function (e) {
     City.prototype.cityCollection[alreadyAddedIndex].maximumCustomer = max;
     City.prototype.cityCollection[alreadyAddedIndex].average = average;
     City.prototype.cityCollection[alreadyAddedIndex].simulateCookieSales();
-    City.prototype.drawTable(citiesTable);
+    City.prototype.cityCollection[alreadyAddedIndex].calculateTotals();
+    City.prototype.updateAllTotals();
   } else {
     let newCity = new City(cityName, min, max, average);
-    newCity.renderNewCity(citiesTable);
+    newCity.simulateCookieSales();
+    newCity.calculateTotals();
+    City.prototype.cityCollection.push(newCity);
+    City.prototype.updateAllTotals();
   }
+  City.prototype.drawTable(citiesTable);
 });
+
+
+
+
+
