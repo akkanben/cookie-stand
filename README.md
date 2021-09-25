@@ -1,14 +1,11 @@
 # Salmon Cookies
-<<<<<<< HEAD
 
-## Lab: 06
+## Week 2 Code Fellows
 
-Today's lab was to generate sales data for Pat's Salmon Cookie Store with JavaScript object literals. The sales data had to simulated and appended to the HTML docutment. 
+I designed this website to serve for a home page for a made up cookie company specializing in salmon flavored cookies. In the fiction Pat has also asked me to also create a sales page that renders the days sales in their 5 stores around the globe. The form has an input option for adding new locations or updating existing locations. 
 
 ### Author Ben Mills
 
 ### Credits
 
-`box-shadow` article helped me understand multiple light sources and how to make a more gentle shadow: [Josh W.Comeau](https://www.joshwcomeau.com/css/designing-shadows)
-=======
->>>>>>> 838aeeb5d9061ad3bf33fa233ef50abad8a2078c
+A great `box-shadow` article helped me understand multiple light sources and how to make a more gentle shadow: [Josh W.Comeau](https://www.joshwcomeau.com/css/designing-shadows)
